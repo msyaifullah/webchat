@@ -1,0 +1,38 @@
+service: poc-chat
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /
+  static_files: index.html
+  upload: index.html
+  secure: always
+
+- url: /worker.js
+  static_files: worker.js
+  upload: worker.js
+
+- url: /assets/(.*\.(gif|png|jpg))$
+  static_files: assets/\1
+  upload: assets/.*\.(gif|png|jpg)$
+
+- url: /assets
+  static_dir: assets
+
+- url: /dist
+  static_dir: dist
+
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+skip_files:
+- node_modules/
+- coverage/
+- k8s/
